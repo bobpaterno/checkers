@@ -1,10 +1,8 @@
-# client-template
+# Checkers
 
-Serves as a template for client JavaScript applications.
+Simple checkers application
 
-It uses:
-* Jade
-* Less
-* Grunt
-* JSHint
-* Node.js
+Features:
+* Users play on one computer
+* Mouse-sharing
+* Close quarters
