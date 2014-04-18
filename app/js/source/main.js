@@ -10,20 +10,22 @@
     currPlayer = 'player1';
     addSpaces();
     setupBoard();
+    getYdir();
 
-    $('#board').on('click','.validSpace', selectPiece);
+    $('#board').on('click','.piece', selectPiece);
     $('#board').on('click','td:not(.piece)', movePiece);
   }
 
   function movePiece() {
-    // case where user clicks on a white space
-    // rather than make them re-select the same piece again...just leave it selected
-    if($(this).hasClass('validSpace')) {
-      $('.selected').removeClass('selected');
+debugger;
+    if($(this).hasClass('validSpace') && $('.selected').length) {
+        isAdjacent($(this).data('x'), $(this).data('y'));
+
     }
   }
 
   function selectPiece() {
+debugger;
     if(isSelected()) {
       $('.selected').removeClass('selected');
     }
@@ -32,6 +34,36 @@
         $(this).addClass('selected');
       }
     }
+
+  }
+
+  function isAdjacent(x, y) {
+    var currXY = getCurrPiecePos();
+    var offX = Math.abs(currXY[0] - x);
+    var offY = currXY[1] + y;
+
+    if(offX === 1 && offY === 1) {
+      if(currPlayer === 'player1') {
+        return (offY > 0)?true : false;
+      }
+      else {
+        return (offY < 0)?true : false;
+      }
+    }
+
+    return false;
+  }
+
+
+  function getCurrPiecePos() {
+    var xy=[];
+    xy[0] = $('.selected').data('x');
+    xy[1] = $('.selected').data('y');
+    return xy;
+  }
+
+  function getYdir() {
+    return $('.selected').hasClass('player1')? 1 : -1;
   }
 
   function isSelected() {
