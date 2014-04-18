@@ -39,7 +39,10 @@ html, button, input, select, textarea,
 }
 
 .button-secondary {
-  background: rgba(108, 67, 223, 0.55);
+  background: rgba(70, 52, 8, 0.95);
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .button-xsmall {
@@ -80,20 +83,30 @@ td {
 
 }
 
+.current {
+  background-color: rgba(50, 24, 8, 0.8);
+}
+
 .selected {
   background-color: rgba(222, 186, 41, 0.63);
 }
 
-.thing {
-  margin: 9px;
-  margin-top: 20px;
-  padding: 9px;
+.checker-board {
+  width: 100%;
+  margin: auto;
   border: 9px solid rgba(30,30,30,0.8);
   background-color: rgba(50, 24, 8, 0.64);
-  min-width: 500px;
-  max-width: 530px;
+  padding: 9px;
+  margin-top: 20px;
+//  max-width: 530px;
 }
 
-table {
-  margin: auto;
+
+
+.player1.king {
+  background-image: url('../media/kingB.png');
+}
+
+.player2.king {
+  background-image: url('../media/kingR.png');
 }
