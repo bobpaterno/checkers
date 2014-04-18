@@ -4,46 +4,56 @@
 
   $(document).ready(init);
 
-  var currPlayer;
 
   function init() {
-    currPlayer = 'player1';
     addSpaces();
     setupBoard();
     getYdir();
 
-    $('#board').on('click','.piece', selectPiece);
-    $('#board').on('click','td:not(.piece)', movePiece);
+    $('#board').on('click','.piece.current', selectPiece);
+    $('#board').on('click','td:not(.piece)', checkSpace);
   }
 
-  function movePiece() {
-debugger;
+  function checkSpace() {
     if($(this).hasClass('validSpace') && $('.selected').length) {
-        isAdjacent($(this).data('x'), $(this).data('y'));
+        if(isAdjacent($(this).data('x'), $(this).data('y'))) {
+          move(this);
+        }
 
     }
+  }
+
+  function move(curr) {
+    if($('.selected').hasClass('player1')){
+      $(curr).addClass('player1 piece');
+      $('.selected').removeClass('player1 piece selected current');
+      $('.player1').removeClass('current');
+      $('.player2').addClass('current');
+    } else {
+      $(curr).addClass('player2 piece');
+      $('.selected').removeClass('player2 piece selected current');
+      $('.player2').removeClass('current');
+      $('.player1').addClass('current');
+    }
+
   }
 
   function selectPiece() {
-debugger;
     if(isSelected()) {
       $('.selected').removeClass('selected');
     }
-    if($(this).hasClass('piece')) {
-      if($(this).hasClass(currPlayer)) {
-        $(this).addClass('selected');
-      }
-    }
+    $(this).addClass('selected');
 
   }
 
   function isAdjacent(x, y) {
+debugger;
     var currXY = getCurrPiecePos();
     var offX = Math.abs(currXY[0] - x);
-    var offY = currXY[1] + y;
+    var offY = currXY[1]-y;
 
-    if(offX === 1 && offY === 1) {
-      if(currPlayer === 'player1') {
+    if(offX === 1 && Math.abs(offY) === 1) {
+      if($('.selected').hasClass('player1')) {
         return (offY > 0)?true : false;
       }
       else {
@@ -73,13 +83,11 @@ debugger;
   function setupBoard() {
     var spaces = $('.validSpace');
     for(var i=0; i<12; i++) {
-      $(spaces[i]).addClass('player2');
-      $(spaces[i]).addClass('piece');
+      $(spaces[i]).addClass('player2 piece');
     }
 
     for(i=20; i<32; i++) {
-      $(spaces[i]).addClass('player1');
-      $(spaces[i]).addClass('piece');
+      $(spaces[i]).addClass('player1 piece current');
     }
   }
 
@@ -88,5 +96,30 @@ debugger;
     $('tr:nth-child(2n-1) td:nth-child(2n)').addClass('validSpace');
   }
 
+
+/*
+  function move(){
+    if ($('.selected').length > 0){
+      if($('.selected').hasClass('player1')){
+        $(this).addClass('player1 piece');
+        $('.selected').removeClass('player1 piece selected current');
+        $('.player1').removeClass('current');
+        $('.player2').addClass('current');
+      } else {
+        $(this).addClass('player2 piece');
+        $('.selected').removeClass('player2 piece selected current');
+        $('.player2').removeClass('current');
+        $('.player1').addClass('current');
+      }
+    }
+  }
+
+  function selectPiece(){
+    if ($('.selected').length > 0){
+      $('.selected').removeClass('selected');
+    }
+    $(this).addClass('selected');
+  }
+*/
 
 })();
