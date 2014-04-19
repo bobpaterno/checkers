@@ -6,7 +6,6 @@
   function init() {
     addSpaces();
     setupBoard();
-    getYdir();
 
     $('#start').click(setupBoard);
     $('#board').on('click','.piece.current', selectPiece);
@@ -107,10 +106,6 @@
     xy[0] = $('.selected').data('x');
     xy[1] = $('.selected').data('y');
     return xy;
-  }
-
-  function getYdir() {
-    return $('.selected').hasClass('player1')? 1 : -1;
   }
 
   function isSelected() {
