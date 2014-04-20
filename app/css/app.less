@@ -72,23 +72,34 @@ td {
 
 .player1 {
   background-image: url('../media/blue.png');
-  background-size: 100%;
+  background-size: 96%;
   background-repeat: no-repeat;
 }
 
 .player2 {
   background-image: url('../media/red.png');
-  background-size: 100%;
+  background-size: 96%;
   background-repeat: no-repeat;
-
 }
 
 .current {
-  background-color: rgba(50, 24, 8, 0.8);
+  -webkit-animation: bgpulse 6s linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes bgpulse {
+  0%   { background-color: rgba(45,45,45,.9); } //rgba(50,24,8,0.8); }
+  25% { background-color: rgba(203, 148, 125, 0.81); }
+  60%   { background-color: rgba(45,45,45,.9); } //rgba(50,24,8,0.8); }
+}
+
+.current:hover {
+  background-size: 100%;
 }
 
 .selected {
-  background-color: rgba(222, 186, 41, 0.63);
+//  background-color: rgba(222, 186, 41, 0.63) !important;
+  background-size: 100%;
 }
 
 .checker-board {
@@ -109,4 +120,21 @@ td {
 
 .player2.king {
   background-image: url('../media/kingR.png');
+}
+
+.validMove {
+  background-color: rgba(168, 157, 126, 0.33);
+}
+
+.validJump {
+  background-color: rgba(168, 157, 126, 0.33);
+}
+
+.hintmsg {
+  color:  white;
+  font-size: 2em;
+}
+
+.hidemsg {
+  display: none;
 }
