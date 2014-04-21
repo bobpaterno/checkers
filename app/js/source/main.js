@@ -10,11 +10,6 @@
     $('#start').click(setupBoard);
     $('#board').on('click','.piece.current', selectPiece);
     $('#board').on('click','.validMove', checkMove);
-    $('#board').on('mouseover', '.piece', logClasses);
-  }
-
-  function logClasses() {
-    console.log($(this).attr('class'), $(this).data('x'), $(this).data('y'));
   }
 
   function selectPiece() {
@@ -39,17 +34,17 @@
       switchTurns();
       $(this).addClass('selected');
       setLegalMoves();
-      $('.validMove:not(.validJump)').removeClass('validMove');
-      if(!isJump()) {
+      $('.validMove:not(.validJump)').removeClass('validMove');  // so user can ONLY jump
+      if(!isJump()) { // is not another jump
         $(this).removeClass('selected');
         switchTurns();
       }
-      else {
+      else {  // is another jump
         $('.hintmsg').addClass('forceJump');
         $('.hintmsg').removeClass('hidemsg');
       }
     }
-    else {
+    else { // no jump, just regular move
       move(this, player);
     }
 
@@ -57,7 +52,6 @@
       alert('You Won!');
       setupBoard();
     }
-
   }
 
   function move(curr, p) {
@@ -71,6 +65,7 @@
   }
 
   function setLegalMoves() {
+    // returns false if there are no legal jumps, true if there are legal jumps
     var x = selPieceX();
     var y = selPieceY();
     var i;
@@ -78,6 +73,7 @@
 
     clearLegalMoves();
 
+    // checks two adjacent squares
     if($('.selected').hasClass('player1') || $('.selected').hasClass('king')) {
       for(i=-1; i<2; i+=2) {
         if(isUnoccupied(x-i,y-1) ) {
@@ -90,6 +86,7 @@
         }
       }
     }
+    // checks two jumpable squares
     if($('.selected').hasClass('player2') || $('.selected').hasClass('king') ) {
       for(i=-1; i<2; i+=2) {
         if(isUnoccupied(x-i,y+1) ) {
@@ -191,6 +188,5 @@
     $('tr:nth-child(2n) td:nth-child(2n+1)').addClass('validSpace');
     $('tr:nth-child(2n-1) td:nth-child(2n)').addClass('validSpace');
   }
-
 
 })();
