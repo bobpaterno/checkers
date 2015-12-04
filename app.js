@@ -1,10 +1,10 @@
 var http = require('http');
 var connect = require('connect');
 var directory = 'public';
-var port = process.env.PORT;
+var port = process.env.PORT || 9000;
 
 var app = connect()
-  .use(connect.logger(':remote-addr -> :method :url [:status]'))
+//.use(connect.logger(':remote-addr -> :method :url [:status]'))
   .use(connect.static(directory));
 
 http.createServer(app).listen(port, function(){

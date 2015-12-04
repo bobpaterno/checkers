@@ -6,7 +6,7 @@
     "start": "node app.js"
   },
   "dependencies":{
-    "connect": "*"
+    "connect": "^2.3.0"
   },
   "devDependencies":{
     "grunt"               : "*",
